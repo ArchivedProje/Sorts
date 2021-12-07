@@ -8,10 +8,10 @@
 
 
 ## Bubble Sort
-![](https://media.proglib.io/wp-uploads/-000//1/596b722779f8b_Yb6G53y.gif)
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Sorting_bubblesort_anim.gif/250px-Sorting_bubblesort_anim.gif)
 
 ## Quick Sort
-![](https://media.proglib.io/wp-uploads/-000//1/596b722a05151_A0eQUHL.gif)
+![](https://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif)
 
 ## Merge Sort
 ![](https://media.proglib.io/wp-uploads/-000//1/596b722dc99d1_3qHz285.gif)
