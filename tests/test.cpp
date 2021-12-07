@@ -99,21 +99,21 @@ TEST(Sorts, MergeSort) {
     {
         std::vector<int> v1;
         auto v2 = v1;
-        merge_sort(v1.begin(), v1.end(), v1.begin());
+        merge_sort(v1.begin(), v1.end());
         EXPECT_EQ(v2, v1);
     }
     {
         std::vector<int> v1 = {-2, 0, -4, 12, 1, 3, 4};
         auto v2 = v1;
         std::sort(v2.begin(), v2.end());
-        merge_sort(v1.begin(), v1.end(), v1.begin());
+        merge_sort(v1.begin(), v1.end());
         EXPECT_EQ(v1, v2);
     }
     {
         std::vector<float> v1 = {0.1, -0.3, 0.123, 0.001, 1.23, -9.0};
         auto v2 = v1;
         std::sort(v2.begin(), v2.end());
-        merge_sort(v1.begin(), v1.end(), v1.begin());
+        merge_sort(v1.begin(), v1.end());
         EXPECT_EQ(v1, v2);
     }
 }
@@ -126,7 +126,7 @@ TEST(Sorts, InsertionSort) {
         EXPECT_EQ(v2, v1);
     }
     {
-        std::vector<int> v1 = {-2, 0, -4, 12, 1, 3, 4};
+        std::vector<int> v1 = {-2, 0, -4, 12, 3, 4};
         auto v2 = v1;
         std::sort(v2.begin(), v2.end());
         insertion_sort(v1.begin(), v1.end());

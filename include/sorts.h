@@ -32,40 +32,41 @@ void quick_sort(RandomIt begin, RandomIt end, Compare cmp = Compare()) {
     quick_sort(second_it, end, cmp);
 }
 
-template<typename RandomIt, typename Out, typename Compare = std::less<>>
-Out merge(RandomIt first1, RandomIt last1, RandomIt first2, RandomIt last2, Out out,
-          Compare cmp = Compare()) {
-    while (first1 != last1 && first2 != last2) {
-        if (cmp(*first2, *first1)) {
-            *out = *first2;
-            ++first2;
-        } else {
-            *out = *first1;
-            ++first1;
-        }
-        ++out;
+template<typename RandomIt>
+std::vector<typename RandomIt::value_type>
+merge(const RandomIt begin, const RandomIt mid, const RandomIt end) {
+    std::vector<typename RandomIt::value_type> elements;
+    RandomIt it_l(begin);
+    RandomIt it_r(mid);
+    const RandomIt it_mid(mid);
+    const RandomIt it_end(end);
+    while (it_l != it_mid && it_r != it_end) {
+        elements.push_back((*it_l <=  *it_r) ? *it_l++ : *it_r++);
     }
-    return std::copy(first2, last2, std::copy(first1, last1, out));
+
+    elements.insert(elements.end(), it_l, it_mid);
+    elements.insert(elements.end(), it_r, it_end);
+
+    return elements;
 }
 
-template<typename RandomIt, typename Out, typename Compare = std::less<>>
-Out merge_sort(RandomIt begin, RandomIt end, Out out, Compare cmp = Compare()) {
-    if (std::distance(end, begin) <= 1) return begin;
+template<typename RandomIt>
+void merge_sort(RandomIt begin, RandomIt end) {
+    auto size = std::distance(begin, end);
+    if (size < 2) return;
 
-    std::vector elements(begin, end);
-    auto elements_begin = elements.begin();
-    auto elements_end = elements.end();
-    auto middle = elements.size() / 2 + elements_begin;
-    merge_sort(elements_begin, middle, out);
-    merge_sort(middle, elements_end, out);
-    out = merge(elements_begin, middle, middle, elements_end, begin, cmp);
-    return out;
+    auto middle = std::next(begin, size / 2);
+    merge_sort(begin, middle);
+    merge_sort(middle, end);
+
+    auto &&res = merge(begin, middle, end);
+    std::move(res.cbegin(), res.cend(), begin);
 }
 
 template<class RandomIt>
 void insertion_sort(RandomIt begin, RandomIt end) {
     for (auto i = begin; i != end; ++i) {
-        std::rotate(std::upper_bound(begin, i, *i), i, i+1);
+        std::rotate(std::upper_bound(begin, i, *i), i, i + 1);
     }
 }
 
